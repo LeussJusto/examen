@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <h1>foro</h1>
+    <div id="foro">
+        <div id="comentarios">
+        </div>
+        <form id="foro">
+            <input type="text" id="campo-comentario" required>
+            <button type="submit">este es un boton que cuando presiona, solo escribe lo que tu escribiste, increible no?!!, en conclusion es un boton que publica tu comentario :D</button>
+        </form>
+
+        <footer>LEONARDO JUSTO JURADO</footer>
+
+    </div>
+    
+    <script>
+        const comentarios = [];
+
+        function agregarComentario(texto) {
+            const comentario = {
+                id: comentarios.length + 1,
+                texto: texto
+            };
+            comentarios.push(comentario);
+            mostrarComentarios();
+        }
+        function mostrarComentarios() {
+            const contenedorComentarios = document.getElementById('comentarios');
+            contenedorComentarios.innerHTML = ''; 
+
+            comentarios.forEach(comentario => {
+                const divComentario = document.createElement('div');
+                divComentario.textContent = comentario.texto;
+                contenedorComentarios.appendChild(divComentario);
+            });
+        }
+        document.getElementById('foro').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const campoComentario = document.getElementById('campo-comentario');
+            const textoComentario = campoComentario.value.trim();
+
+            if (textoComentario) {
+                agregarComentario(textoComentario);
+                campoComentario.value = ''; 
+            }
+        });
+    </script>
+</body>
+</html>
